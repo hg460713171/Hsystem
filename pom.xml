@@ -6,6 +6,7 @@
     <modules>
         <module>hs-webapp</module>
         <module>hs-admin</module>
+        <module>hs-common</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -19,7 +20,7 @@
     <name>Hsystem</name>
     <description>Hsystem</description>
     <properties>
-        <java.version>17</java.version>
+        <java.version>11</java.version>
         <version>0.0.1-SNAPSHOT</version>
     </properties>
     <dependencyManagement>

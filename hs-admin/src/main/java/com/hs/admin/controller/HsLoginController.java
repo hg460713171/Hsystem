@@ -8,6 +8,11 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.concurrent.CountDownLatch;
+
 @RestController
 @RequestMapping("/home")
 @Slf4j
@@ -16,14 +21,13 @@ public class HsLoginController {
     @PostMapping(value = "/doLogin")
     public void doLogin(){
         Subject subject = SecurityUtils.getSubject();
+        Deque<Integer> queue = new LinkedList<>();
         try {
             UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken("1", "1");
             subject.login(usernamePasswordToken);
-
-            System.out.println("登陆成功");
+            log.info("登陆成功");
         }catch (Exception e){
-            e.printStackTrace();
-            System.out.println("登陆失败");
+            log.error("登陆失败");
         }
     }
 

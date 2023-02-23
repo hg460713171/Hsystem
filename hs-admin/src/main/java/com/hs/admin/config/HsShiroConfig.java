@@ -1,7 +1,10 @@
 package com.hs.admin.config;
 
+import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.credential.SimpleCredentialsMatcher;
+import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
@@ -14,7 +17,6 @@ import org.springframework.core.annotation.AliasFor;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
 @Configuration
 @Slf4j
 public class HsShiroConfig {
@@ -28,11 +30,8 @@ public class HsShiroConfig {
 
 
 
-//    //引入密码校验
-//    @Bean
-//    public HsCredentialsMatcher myCredentialsMatcher(){
-//        return new HsCredentialsMatcher();
-//    }
+
+    //引入密码校验
     //配置一个安全管理器
     @Bean
     DefaultWebSecurityManager securityManager(){
@@ -44,7 +43,7 @@ public class HsShiroConfig {
         manager.setRealm(myRealm);
         //设置Session管理器，配置shiro中Session的持续时间
         manager.setSessionManager(getDefaultWebSessionManager());
-
+        SecurityUtils.setSecurityManager(manager);
         return manager;
     }
 
