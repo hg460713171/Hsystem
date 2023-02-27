@@ -45,8 +45,7 @@ public class HsMqController {
     }
 
     // 监听消费延时消息
-   // @RabbitListener(queues = {"delay_queue"})
-   // @RabbitHandler
+    @RabbitListener(queues = {"delay_queue"})
     public void process(String content, Message message, Channel channel) throws IOException {
         try {
             // 消息的可定确认，第二个参数如果为true将一次性确认所有小于deliveryTag的消息
@@ -64,7 +63,6 @@ public class HsMqController {
 
     // 消费普通消息
     @RabbitListener(queues = {"normal_queue"})
-    @RabbitHandler
     public void process1(String content, Message message, Channel channel) throws IOException {
         try {
             log.info("普通队列的内容[{}]", content);

@@ -116,7 +116,7 @@ public class RabbitmqConfig {
          * exchange   消息使用的交换机
          * routingKey 消息使用的路由键
          */
-        rabbitTemplate.setReturnsCallback(new MsgSendReturnCallback());
+        rabbitTemplate.setReturnCallback(new MsgSendReturnCallback());
         rabbitTemplate.setMessageConverter(jsonMessageConverter());
         return rabbitTemplate;
     }

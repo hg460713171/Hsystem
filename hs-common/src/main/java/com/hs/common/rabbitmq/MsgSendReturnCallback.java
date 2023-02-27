@@ -2,12 +2,12 @@ package com.hs.common.rabbitmq;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.amqp.core.ReturnedMessage;
+import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MsgSendReturnCallback implements RabbitTemplate.ReturnsCallback {
+public class MsgSendReturnCallback implements RabbitTemplate.ReturnCallback {
     private static Logger logger = LogManager.getLogger(MsgSendReturnCallback.class);
 
     /**
@@ -23,14 +23,19 @@ public class MsgSendReturnCallback implements RabbitTemplate.ReturnsCallback {
      */
 
 
+//    @Override
+//    public void returnMessage(ReturnedMessage returnedMessage) {
+//        if (returnedMessage.getExchange().equals(RabbitmqConstant.MQ_WEBSITE_FILM_DELAY_EXCHANGE)) {
+//            // 如果配置了发送回调ReturnCallback，rabbitmq_delayed_message_exchange插件会回调该方法，因为发送方确实没有投递到队列上，只是在交换器上暂存，等过期/时间到了才会发往队列。
+//            // 所以如果是延迟队列的交换器，则直接放过，并不是bug
+//            return;
+//        }
+//        String correlationId = returnedMessage.getMessage().getMessageProperties().getCorrelationId();
+//        logger.debug("消息：{} 发送失败, 应答码：{} 原因：{} 交换机: {}  路由键: {}", correlationId, returnedMessage.getReplyCode(), returnedMessage.getReplyText(), returnedMessage.getExchange(), returnedMessage.getRoutingKey());
+//    }
+
     @Override
-    public void returnedMessage(ReturnedMessage returnedMessage) {
-        if (returnedMessage.getExchange().equals(RabbitmqConstant.MQ_WEBSITE_FILM_DELAY_EXCHANGE)) {
-            // 如果配置了发送回调ReturnCallback，rabbitmq_delayed_message_exchange插件会回调该方法，因为发送方确实没有投递到队列上，只是在交换器上暂存，等过期/时间到了才会发往队列。
-            // 所以如果是延迟队列的交换器，则直接放过，并不是bug
-            return;
-        }
-        String correlationId = returnedMessage.getMessage().getMessageProperties().getCorrelationId();
-        logger.debug("消息：{} 发送失败, 应答码：{} 原因：{} 交换机: {}  路由键: {}", correlationId, returnedMessage.getReplyCode(), returnedMessage.getReplyText(), returnedMessage.getExchange(), returnedMessage.getRoutingKey());
+    public void returnedMessage(Message message, int i, String s, String s1, String s2) {
+
     }
 }
