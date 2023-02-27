@@ -16,6 +16,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.servlet.Filter;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 @Configuration
 @Slf4j
 public class HsShiroConfig {
@@ -30,23 +35,25 @@ public class HsShiroConfig {
         //传入安全管理器
         bean.setSecurityManager(securityManager());
 //        //传入未登录用户访问登陆用户的权限所跳转的页面
-   //     bean.setLoginUrl("/home/doLogin");
+        bean.setLoginUrl("/home/doLogin");
  //       bean.setSuccessUrl("/index");
 //
 //        //访问未授权网页所跳转的页面
-  //     bean.setUnauthorizedUrl("/unauthorized");
-//        Map<String, String> map = new LinkedHashMap<>();
+        bean.setUnauthorizedUrl("/unauthorized");
+        Map<String, String> map = new LinkedHashMap<>();
 //        //允许  需要设置login为anon 否则登陆成功后无法成功跳转。
 //        map.put("/login", "anon");
-//        map.put("/doLogin", "authc");
+     //   map.put("/home/doLogin", "authc");
 //        map.put("/index", "anon");
 //        //设置所有的请求未登录不允许进入。
 //        map.put("/**", "authc");
-//        Map<String, Filter> filters = new HashMap<>();
-//        filters.put("cus",customFormAuthenticationFilter);
-//        bean.setFilters(filters);
-//        map.put("/**", "cus");
-//        bean.setFilterChainDefinitionMap(map);
+        customFormAuthenticationFilter.setLoginUrl("/home/doLogin");
+        Map<String, Filter> filters = new HashMap<>();
+        filters.put("cus",customFormAuthenticationFilter);
+        map.put("/home/doLogin", "authc");
+      //  map.put("/**", "cus");
+        bean.setFilters(filters);
+        bean.setFilterChainDefinitionMap(map);
         return bean;
     }
     @Bean

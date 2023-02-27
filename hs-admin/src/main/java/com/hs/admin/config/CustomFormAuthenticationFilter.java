@@ -1,5 +1,7 @@
 package com.hs.admin.config;
 
+import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
@@ -12,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Component
+@Slf4j
 public class CustomFormAuthenticationFilter extends FormAuthenticationFilter {
     @Override
     protected boolean onLoginSuccess(AuthenticationToken token, Subject subject, ServletRequest request,
@@ -20,10 +23,13 @@ public class CustomFormAuthenticationFilter extends FormAuthenticationFilter {
 //        //获取session
         //String activeUser =  subject.getPrincipal();
 
-        HttpServletRequest httpServletRequest = WebUtils.toHttp(request);
-        HttpSession session = httpServletRequest.getSession();
-        //把用户信息保存到session
-        session.setAttribute("activeUser","1");
+        log.info("success");
         return super.onLoginSuccess(token, subject, request, response);
+    }
+    @Override
+    protected boolean onLoginFailure(AuthenticationToken token, AuthenticationException e,
+                                     ServletRequest request, ServletResponse response) {
+        log.info("failure");
+        return super.onLoginFailure(token, e, request, response);
     }
 }

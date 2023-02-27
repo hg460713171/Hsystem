@@ -24,9 +24,12 @@ public class HsLoginController {
     public void doLogin(){
         Subject subject = SecurityUtils.getSubject();
         try {
+            subject.isAuthenticated();
             UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken("1", "1");
             subject.login(usernamePasswordToken);
             log.info("登陆成功");
+            HttpServletRequest request =  ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();;
+            request.getSession().setAttribute("123","123");
 
         }catch (Exception e){
             log.error("登陆失败");
