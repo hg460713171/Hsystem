@@ -89,5 +89,4 @@ http {
 6. clone a font-end project in github and build this project
 7. put dist directory to http proxy nginx.
 8. reload http proxy nginx.
-9. 
 the full version of configuration is in this directory /files/nginxconf/

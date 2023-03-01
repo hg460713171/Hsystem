@@ -7,4 +7,9 @@ let's assume that we have a vey simple architecture. how do we develop it to a h
 ### simple architecture：
 At first, we should achieve this simple architecture.
 ![1](images/architecture1.jpg)
-#### first part----  [Font-End And Load Balancer](files/mdfile/english/font_end.md)
+### Frist Part----  [Font-End And Load Balancer](files/mdfile/english/font_end.md)
+### Second Part----  Back-End
+
+- [build a spring boot project and integrate basic components](files/mdfile/english/springboot.md)
+- [integrate security in our system ](files/mdfile/english/shiro.md)
+
