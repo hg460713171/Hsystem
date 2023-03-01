@@ -1,17 +1,17 @@
 
-# introduce：
+# Introduce：
 Typically, we have more two layer of font-end system to process
-request. but we can divide it into two components.
+request. but we can divide it into two part.
 Before that, I will introduce a concept:reverse proxy and the difference between proxy and reverse proxy is very simple.
 > you can consider proxy as a VPN. you send request to vpn server and vpn server send request to your server
 > But for reverse proxy,you send request to vpn server and then vpn server send request to reverse proxy. Finally, reverse proxy send request to your server.
-- first component: 4-layer load balancer.
+- first part: 4-layer load balancer.
 > It's about how we can get a http request.
 Client click a button in browser. then A http1.1 request will be sent to DNS server. In some extent,DNS can help you do some
 >load balancer job and sent a http(s) request to real server which is our 4-layer load balancer.
 > why it called 4-layer, because it only proxy tcp/udp in network layer. what the load balance do is just fetch the request and  
 > change ip/port and then deliver it to next layer.
-- second component: 7-layer load balancer.
+- second part: 7-layer load balancer.
 > 4-layer load balancer will send request to 7-layer load balancer, typically it is last layer. 7-layer load balance
 > is much  heavier than 4-layer ones. Because, it needs to parse the whole http message. and wrap it and establish a tcp link to
 > real back-end server
@@ -19,8 +19,7 @@ Client click a button in browser. then A http1.1 request will be sent to DNS ser
 > because it is more powerful , we can know what kind of http message it is and change some certain message in certain http request.
 ## Font-End
 frist of all, we should have a font-end project.Unfortunately, I have not time to build a whole font-end system .
-so we just clone one in github.  I use this as my web-site https://github.com/lin-xin/vue-manage-system
-## nginx：
+so we just clone one in github.  I use this as my web-sitez
 we can choose nginx or F5  as our load balancer, but f5 is more expensive than nginx.
 F5 is hardware.However,nginx is open-source software.
 - download and install nginx(in docker enviroment)
@@ -40,6 +39,7 @@ docker run --name=nginx --volume=/Users/hou/Desktop/sofeware_develop/nginx/logs:
 ````
 stream {
     upstream yourname {
+            # next proxy address
             server 172.16.1.5:80 weight=5 max_fails=3 fail_timeout=30s;
             server 172.16.1.6:80 weight=5 max_fails=3 fail_timeout=30s;
     }
@@ -80,4 +80,14 @@ http {
     }
     
 ````
-
+## Summary
+1. buy a domain name and bind it to your 4-layer proxy
+2. pull nginx form docker hub 
+3. run two nginx 
+4. change one to tcp proxy
+5. change another one to http proxy
+6. clone a font-end project in github and build this project
+7. put dist directory to http proxy nginx.
+8. reload http proxy nginx.
+9. 
+the full version of configuration is in this directory /files/nginxconf/
