@@ -1,5 +1,5 @@
 
-##### introduce：
+# introduce：
 Typically, we have more two layer of font-end system to process
 request. but we can divide it into two components.
 Before that, I will introduce a concept:reverse proxy and the difference between proxy and reverse proxy is very simple.
@@ -17,7 +17,7 @@ Client click a button in browser. then A http1.1 request will be sent to DNS ser
 > real back-end server
 - why we use 7-layer load balancer.
 > because it is more powerful , we can know what kind of http message it is and change some certain message in certain http request.
-##### nginx：
+## nginx：
 we can choose nginx or F5  as our load balancer, but f5 is more expensive than nginx.
 F5 is hardware.However,nginx is open-source software.
 - download and install nginx(in docker enviroment)
