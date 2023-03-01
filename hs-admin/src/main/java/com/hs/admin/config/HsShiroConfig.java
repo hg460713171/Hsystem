@@ -35,7 +35,7 @@ public class HsShiroConfig {
         //传入安全管理器
         bean.setSecurityManager(securityManager());
 //        //传入未登录用户访问登陆用户的权限所跳转的页面
-        bean.setLoginUrl("/home/doLogin");
+   //     bean.setLoginUrl("/home/doLogin");
  //       bean.setSuccessUrl("/index");
 //
 //        //访问未授权网页所跳转的页面
@@ -49,8 +49,9 @@ public class HsShiroConfig {
 //        map.put("/**", "authc");
         customFormAuthenticationFilter.setLoginUrl("/home/doLogin");
         Map<String, Filter> filters = new HashMap<>();
-        filters.put("cus",customFormAuthenticationFilter);
-        map.put("/home/doLogin", "authc");
+       // filters.put("cus",customFormAuthenticationFilter);
+    //    map.put("/home/doLogin", "anon");
+     //   map.put("/**", "authc");
       //  map.put("/**", "cus");
         bean.setFilters(filters);
         bean.setFilterChainDefinitionMap(map);
@@ -75,7 +76,7 @@ public class HsShiroConfig {
         //将我们配置好的密码校验放入域中
         myRealm.setCredentialsMatcher( getHsCredentialsMatcher());
         //将域添加到我们的安全管理器中
-        manager.setRealm(myRealm);
+        manager.setRealm(getRealm());
         //设置Session管理器，配置shiro中Session的持续时间
         manager.setSessionManager(getDefaultWebSessionManager());
         SecurityUtils.setSecurityManager(manager);

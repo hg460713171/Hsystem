@@ -1,5 +1,6 @@
 package com.hs.admin.controller;
 
+import com.hs.admin.model.UserInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -21,11 +22,11 @@ import java.util.concurrent.CountDownLatch;
 public class HsLoginController {
 
     @PostMapping(value = "/doLogin")
-    public void doLogin(){
+    @ResponseBody
+    public void doLogin(@RequestBody UserInfo user){
         Subject subject = SecurityUtils.getSubject();
         try {
-            subject.isAuthenticated();
-            UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken("1", "1");
+            UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(user.getUsername(), user.getPassword());
             subject.login(usernamePasswordToken);
             log.info("登陆成功");
             HttpServletRequest request =  ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();;

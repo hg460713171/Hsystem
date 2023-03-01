@@ -31,6 +31,6 @@ public class HsRealm extends AuthorizingRealm {
             throw new UnknownAccountException("账号不存在");
         }
         //返回一个新封装的认证实体，传入的是用户名，数据库查出来的密码，和当前Realm的名字
-        return new SimpleAuthenticationInfo(username, "1", this.getName());
+        return new SimpleAuthenticationInfo(username, "123", this.getName());
     }
 }
