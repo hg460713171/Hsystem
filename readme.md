@@ -7,4 +7,4 @@ let's assume that we have a vey simple architecture. how do we develop it to a h
 ### simple architecture：
 At first, we should achieve this simple architecture.
 ![1](images/architecture1.jpg)
-#### first part----  [font-end load balancer](files/mdfile/english/font_end.md)
+#### first part----  [Font-End And Load Balancer](files/mdfile/english/font_end.md)
