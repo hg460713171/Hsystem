@@ -4,9 +4,9 @@
     <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
     <modules>
-        <module>hs-webapp</module>
         <module>hs-admin</module>
         <module>hs-common</module>
+        <module>hs-admin-api</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
