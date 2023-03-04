@@ -20,7 +20,7 @@
     <name>Hsystem</name>
     <description>Hsystem</description>
     <properties>
-        <java.version>8</java.version>
+        <java.version>11</java.version>
         <version>0.0.1-SNAPSHOT</version>
     </properties>
     <dependencyManagement>
