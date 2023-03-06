@@ -5,6 +5,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>hs-admin</module>
+        <module>hs-report</module>
         <module>hs-common</module>
         <module>hs-admin-api</module>
     </modules>
